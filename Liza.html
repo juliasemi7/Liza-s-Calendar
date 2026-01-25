@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь на Январь и Февраль 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        .calendar-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1200px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+        }
+        .month {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 550px;
+            transition: transform 0.3s ease;
+        }
+        .month:hover {
+            transform: translateY(-5px);
+        }
+        .month-title {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+        .day-name {
+            font-weight: 600;
+            color: #3498db;
+            padding: 12px 5px;
+            font-size: 0.95em;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .day {
+            padding: 15px 5px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            font-size: 1.1em;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        .day:hover {
+            background-color: #edf7ff;
+        }
+        .weekend {
+            color: #e74c3c;
+            background-color: #fff5f5;
+        }
+        /* Основные дни занятий (Пн и Чт) */
+        .lesson-day {
+            background-color: #e8f7ef;
+            border: 2px solid #2ecc71;
+            color: #27ae60;
+            font-weight: 600;
+            font-style: italic;
+        }
+        .lesson-day::after {
+            content: '🎓';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.8em;
+            font-style: normal;
+        }
+        /* Хайлайт 20 рабочих дней */
+        .highlight-day {
+            background-color: #fffacd !important; /* Желтый хайлайтер */
+            box-shadow: inset 0 0 0 2px #ffd700;
+            font-weight: 600;
+        }
+        .empty {
+            background-color: transparent;
+            box-shadow: none;
+        }
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 1130px;
+        }
+        .legend h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .legend-items {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .lesson-color { background-color: #e8f7ef; border: 1px solid #2ecc71; }
+        .highlight-color { background-color: #fffacd; border: 1px solid #ffd700; }
+        .weekend-color { background-color: #fff5f5; border: 1px solid #e74c3c; }
+        .normal-color { background-color: #f9f9f9; border: 1px solid #ddd; }
+        .info-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar-container">
+        <!-- Январь 2026 -->
+        <div class="month">
+            <h2 class="month-title">Январь 2026</h2>
+            <div class="calendar-grid">
+                <div class="day-name">Пн</div>
+                <div class="day-name">Вт</div>
+                <div class="day-name">Ср</div>
+                <div class="day-name">Чт</div>
+                <div class="day-name">Пт</div>
+                <div class="day-name weekend">Сб</div>
+                <div class="day-name weekend">Вс</div>
+
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day weekend">3</div>
+                <div class="day weekend">4</div>
+
+                <div class="day">5</div>
+                <div class="day">6</div>
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day weekend">10</div>
+                <div class="day weekend">11</div>
+
+                <div class="day lesson-day highlight-day">12</div>
+                <div class="day highlight-day">13</div>
+                <div class="day highlight-day">14</div>
+                <div class="day lesson-day highlight-day">15</div>
+                <div class="day highlight-day">16</div>
+                <div class="day weekend">17</div>
+                <div class="day weekend">18</div>
+
+                <div class="day lesson-day highlight-day">19</div>
+                <div class="day highlight-day">20</div>
+                <div class="day highlight-day">21</div>
+                <div class="day lesson-day highlight-day">22</div>
+                <div class="day highlight-day">23</div>
+                <div class="day weekend">24</div>
+                <div class="day weekend">25</div>
+
+                <div class="day lesson-day highlight-day">26</div>
+                <div class="day highlight-day">27</div>
+                <div class="day highlight-day">28</div>
+                <div class="day lesson-day highlight-day">29</div>
+                <div class="day highlight-day">30</div>
+                <div class="day weekend">31</div>
+            </div>
+        </div>
+
+        <!-- Февраль 2026 -->
+        <div class="month">
+            <h2 class="month-title">Февраль 2026</h2>
+            <div class="calendar-grid">
+                <div class="day-name">Пн</div>
+                <div class="day-name">Вт</div>
+                <div class="day-name">Ср</div>
+                <div class="day-name">Чт</div>
+                <div class="day-name">Пт</div>
+                <div class="day-name weekend">Сб</div>
+                <div class="day-name weekend">Вс</div>
+
+                <div class="day lesson-day highlight-day">2</div>
+                <div class="day highlight-day">3</div>
+                <div class="day highlight-day">4</div>
+                <div class="day lesson-day highlight-day">5</div>
+                <div class="day highlight-day">6</div>
+                <div class="day weekend">7</div>
+                <div class="day weekend">8</div>
+
+                <div class="day highlight-day">9</div>
+                <div class="day highlight-day">10</div>
+                <div class="day highlight-day">11</div>
+                <div class="day">12</div>
+                <div class="day">13</div>
+                <div class="day weekend">14</div>
+                <div class="day weekend">15</div>
+
+                <div class="day">16</div>
+                <div class="day">17</div>
+                <div class="day">18</div>
+                <div class="day">19</div>
+                <div class="day">20</div>
+                <div class="day weekend">21</div>
+                <div class="day weekend">22</div>
+
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+                <div class="day">26</div>
+                <div class="day">27</div>
+                <div class="day weekend">28</div>
+                <div class="day empty"></div>
+            </div>
+        </div>
+
+        <!-- Легенда -->
+        <div class="legend">
+            <h3>Обозначения в календаре</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="color-box lesson-color"></div>
+                    <span>Дни занятий (Пн, Чт)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box highlight-color"></div>
+                    <span>20 рабочих дней (без выходных)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box weekend-color"></div>
+                    <span>Выходные дни (Сб, Вс)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box normal-color"></div>
+                    <span>Обычные рабочие дни</span>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <strong>Расчёт 20 рабочих дней:</strong> Отсчёт начат с первого занятия (12 января, понедельник).<br>
+                <strong>Период:</strong> 12 января - 11 февраля 2026 (включительно).<br>
+                <strong>Исключены:</strong> все субботы и воскресенья (17-18, 24-25, 31 января, 7-8, 14-15, 21-22 февраля).
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.lesson-day').forEach(day => {
+            day.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+                alert('Выбрано занятие: ' + this.textContent + ' ' + 
+                      (this.closest('.month').querySelector('.month-title').textContent.split(' ')[0]));
+            });
+        });
+        
+        // Подсветка при наведении на хайлайтед-дни
+        document.querySelectorAll('.highlight-day').forEach(day => {
+            day.addEventListener('mouseenter', function() {
+                if(!this.classList.contains('lesson-day')) {
+                    this.style.backgroundColor = '#fff176';
+                }
+            });
+            day.addEventListener('mouseleave', function() {
+                if(!this.classList.contains('lesson-day')) {
+                    this.style.backgroundColor = '#fffacd';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
