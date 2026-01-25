@@ -210,127 +210,68 @@
             </div>
         </div>
 
-                <!-- Март 2026 -->
-        <div class="month">
-            <h2 class="month-title">Март 2026</h2>
-            <div class="calendar-grid">
-                <div class="day-name">Пн</div>
-                <div class="day-name">Вт</div>
-                <div class="day-name">Ср</div>
-                <div class="day-name">Чт</div>
-                <div class="day-name">Пт</div>
-                <div class="day-name weekend">Сб</div>
-                <div class="day-name weekend">Вс</div>
+     <script>
+        // Функция для применения классов к дням нового пакета и занятий Лизы
+        function applyNewPackageAndLessons() {
+            // Список дней нового пакета (20 дней, февраль-март 2026)
+            const newPackageDays = [
+                '2026-02-09', '2026-02-10', '2026-02-11', '2026-02-12', '2026-02-13',
+                '2026-02-16', '2026-02-17', '2026-02-18', '2026-02-19', '2026-02-20',
+                '2026-02-23', '2026-02-24', '2026-02-25', '2026-02-26', '2026-02-27',
+                '2026-03-02', '2026-03-03', '2026-03-04', '2026-03-05', '2026-03-06'
+            ];
 
-                <div class="day highlight-day-blue">2</div>
-                <div class="day highlight-day-blue">3</div>
-                <div class="day highlight-day-blue">4</div>
-                <div class="day lesson-day highlight-day-blue">5</div>
-                <div class="day highlight-day-blue">6</div>
-                <div class="day weekend">7</div>
-                <div class="day weekend">8</div>
+            // Список дней занятий Лизы (8 занятий, понедельник и четверг)
+            const lizaLessonDays = [
+                '2026-02-09', '2026-02-12', '2026-02-16', '2026-02-19',
+                '2026-02-23', '2026-02-26', '2026-03-02', '2026-03-05'
+            ];
 
-                <div class="day highlight-day-sky">9</div>
-                <div class="day highlight-day-sky">10</div>
-                <div class="day highlight-day-sky">11</div>
-                <div class="day highlight-day-sky">12</div>
-                <div class="day highlight-day-sky">13</div>
-                <div class="day weekend">14</div>
-                <div class="day weekend">15</div>
+            // Проходим по всем месяцам в календаре
+            document.querySelectorAll('.month').forEach(monthDiv => {
+                // Извлекаем название месяца и год из заголовка
+                const title = monthDiv.querySelector('.month-title').textContent.trim();
+                const [monthName, year] = title.split(' ');
+                const yearNum = parseInt(year);
 
-                <div class="day highlight-day-sky">16</div>
-                <div class="day highlight-day-sky">17</div>
-                <div class="day highlight-day-sky">18</div>
-                <div class="day highlight-day-sky">19</div>
-                <div class="day highlight-day-sky">20</div>
-                <div class="day weekend">21</div>
-                <div class="day weekend">22</div>
+                // Простые числовые значения для месяцев
+                const monthNumbers = {
+                    'Январь': 0, 'Февраль': 1, 'Март': 2,
+                    'Апрель': 3, 'Май': 4, 'Июнь': 5,
+                    'Июль': 6, 'Август': 7, 'Сентябрь': 8,
+                    'Октябрь': 9, 'Ноябрь': 10, 'Декабрь': 11
+                };
+                const monthIndex = monthNumbers[monthName];
 
-                <div class="day highlight-day-blue">23</div>
-                <div class="day highlight-day-blue">24</div>
-                <div class="day highlight-day-blue">25</div>
-                <div class="day lesson-day highlight-day-blue">26</div>
-                <div class="day highlight-day-blue">27</div>
-                <div class="day weekend">28</div>
-                <div class="day weekend">29</div>
+                // Ищем все ячейки с днями в этом месяце
+                const dayDivs = monthDiv.querySelectorAll('.day:not(.empty)');
 
-                <div class="day highlight-day-blue">30</div>
-                <div class="day highlight-day-blue">31</div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-            </div>
-        </div>
+                dayDivs.forEach(dayDiv => {
+                    const dayNum = parseInt(dayDiv.textContent);
+                    // Создаем дату для этого дня
+                    const date = new Date(yearNum, monthIndex, dayNum);
+                    // Форматируем в строку YYYY-MM-DD для сравнения
+                    const dateString = date.toISOString().split('T')[0];
 
-        <!-- Апрель 2026 -->
-        <div class="month">
-            <h2 class="month-title">Апрель 2026</h2>
-            <div class="calendar-grid">
-                <div class="day-name">Пн</div>
-                <div class="day-name">Вт</div>
-                <div class="day-name">Ср</div>
-                <div class="day-name">Чт</div>
-                <div class="day-name">Пт</div>
-                <div class="day-name weekend">Сб</div>
-                <div class="day-name weekend">Вс</div>
+                    // Проверяем, входит ли день в новый пакет
+                    if (newPackageDays.includes(dateString)) {
+                        // Удаляем старые классы подсветки, если они есть
+                        dayDiv.classList.remove('highlight-day', 'highlight-day-blue', 'highlight-day-sky');
+                        // Добавляем новый класс для цвета пакета (светло-голубой, продолжение чередования)
+                        dayDiv.classList.add('highlight-day-sky');
+                    }
 
-                <div class="day empty"></div>
-                <div class="day highlight-day-sky">1</div>
-                <div class="day highlight-day-sky">2</div>
-                <div class="day highlight-day-sky">3</div>
-                <div class="day highlight-day-sky">4</div>
-                <div class="day weekend">5</div>
-                <div class="day weekend">6</div>
-
-                <div class="day highlight-day-sky">7</div>
-                <div class="day highlight-day-sky">8</div>
-                <div class="day highlight-day-sky">9</div>
-                <div class="day highlight-day-sky">10</div>
-                <div class="day highlight-day-sky">11</div>
-                <div class="day weekend">12</div>
-                <div class="day weekend">13</div>
-
-                <div class="day highlight-day-blue">14</div>
-                <div class="day highlight-day-blue">15</div>
-                <div class="day highlight-day-blue">16</div>
-                <div class="day highlight-day-blue">17</div>
-                <div class="day highlight-day-blue">18</div>
-                <div class="day weekend">19</div>
-                <div class="day weekend">20</div>
-
-                <div class="day highlight-day-blue">21</div>
-                <div class="day highlight-day-blue">22</div>
-                <div class="day highlight-day-blue">23</div>
-                <div class="day highlight-day-blue">24</div>
-                <div class="day highlight-day-blue">25</div>
-                <div class="day weekend">26</div>
-                <div class="day weekend">27</div>
-
-                <div class="day highlight-day-sky">28</div>
-                <div class="day highlight-day-sky">29</div>
-                <div class="day highlight-day-sky">30</div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-                <div class="day empty"></div>
-            </div>
-        </div>
-    </div>
-
-    <style>
-        /* Добавляем новые стили для чередования цветов пакетов */
-        .highlight-day-blue {
-            background-color: #add8e6 !important; /* светло-синий */
-            box-shadow: inset 0 0 0 2px #5d9cec;
-            font-weight: 600;
+                    // Проверяем, является ли этот день занятием Лизы
+                    if (lizaLessonDays.includes(dateString)) {
+                        // Добавляем класс для дня с уроком
+                        dayDiv.classList.add('lesson-day');
+                    }
+                });
+            });
         }
-        .highlight-day-sky {
-            background-color: #e8f7ff !important; /* светло-голубой (как был) */
-            box-shadow: inset 0 0 0 2px #87ceeb;
-            font-weight: 600;
-        }
-    </style>
+
+        // Вызываем функцию после загрузки страницы
+        document.addEventListener('DOMContentLoaded', applyNewPackageAndLessons);
+    </script>
 </body>
 </html>
