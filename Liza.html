@@ -82,7 +82,6 @@
             color: #e74c3c;
             background-color: #fff5f5;
         }
-        /* Основные дни занятий (Пн и Чт) */
         .lesson-day {
             background-color: #e8f7ef;
             border: 2px solid #2ecc71;
@@ -98,58 +97,14 @@
             font-size: 0.8em;
             font-style: normal;
         }
-        /* Хайлайт 20 рабочих дней */
         .highlight-day {
-            background-color: #fffacd !important; /* Голубой хайлайтер */
+            background-color: #fffacd !important;
             box-shadow: inset 0 0 0 2px #ffd700;
             font-weight: 600;
         }
         .empty {
             background-color: transparent;
             box-shadow: none;
-        }
-        .legend {
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 1130px;
-        }
-        .legend h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .legend-items {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95em;
-        }
-        .color-box {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-        }
-        .lesson-color { background-color: #e8f7ef; border: 1px solid #2ecc71; }
-        .highlight-color { background-color: #fffacd; border: 1px solid #ffd700; }
-        .weekend-color { background-color: #fff5f5; border: 1px solid #e74c3c; }
-        .normal-color { background-color: #f9f9f9; border: 1px solid #ddd; }
-        .info-box {
-            background-color: #e8f4fc;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 0.95em;
         }
     </style>
 </head>
@@ -253,29 +208,8 @@
                 <div class="day empty"></div>
             </div>
         </div>
+    </div>
 
-        <!-- Легенда -->
-        <div class="legend">
-            <h3>Обозначения в календаре</h3>
-            <div class="legend-items">
-                <div class="legend-item">
-                    <div class="color-box lesson-color"></div>
-                    <span>Дни занятий (Пн, Чт)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="color-box highlight-color"></div>
-                    <span>20 рабочих дней (без выходных)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="color-box weekend-color"></div>
-                    <span>Выходные дни (Сб, Вс)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="color-box normal-color"></div>
-                    <span>Обычные рабочие дни</span>
-                </div>
-            </div>
-           
     <script>
         document.querySelectorAll('.lesson-day').forEach(day => {
             day.addEventListener('click', function() {
@@ -288,7 +222,6 @@
             });
         });
         
-        // Подсветка при наведении на хайлайтед-дни
         document.querySelectorAll('.highlight-day').forEach(day => {
             day.addEventListener('mouseenter', function() {
                 if(!this.classList.contains('lesson-day')) {
