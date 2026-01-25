@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 2026 </title>
+    <title>Календарь на 2026 год с пакетами дней</title>
     <style>
         * {
             margin: 0;
@@ -34,8 +34,16 @@
         
         h1 {
             color: #2c3e50;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            color: #4a6fa5;
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
         }
         
         .year-label {
@@ -43,6 +51,80 @@
             color: #4a6fa5;
             font-weight: 600;
             letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            line-height: 1.8;
+        }
+        
+        .description ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .description li {
+            margin-bottom: 5px;
+        }
+        
+        .packages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .package {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .package h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+        }
+        
+        .package-20days h3 {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        
+        .package-liza h3 {
+            border-color: #3498db;
+            color: #3498db;
+        }
+        
+        .package-dates {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .package-date-item {
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 4px solid;
+            background-color: #f8f9fa;
+        }
+        
+        .package-20days .package-date-item {
+            border-left-color: #e74c3c;
+        }
+        
+        .package-liza .package-date-item {
+            border-left-color: #3498db;
         }
         
         .calendar-grid {
@@ -83,7 +165,7 @@
         .calendar th {
             color: #4a6fa5;
             font-weight: 600;
-            padding: 8px 5px;
+            padding: 10px 5px;
             font-size: 0.9rem;
             text-align: center;
             border-bottom: 1px solid #eee;
@@ -91,10 +173,11 @@
         
         .calendar td {
             text-align: center;
-            padding: 8px 5px;
+            padding: 10px 5px;
             font-size: 0.95rem;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: background-color 0.2s;
+            position: relative;
         }
         
         .calendar td:hover {
@@ -104,12 +187,67 @@
         .calendar td.weekend {
             color: #e74c3c;
             font-weight: 600;
+            background-color: #ffebee;
         }
         
-        .calendar td.today {
-            background-color: #4a6fa5;
-            color: white;
+        .calendar td.package-20day {
+            background-color: rgba(231, 76, 60, 0.15);
             font-weight: 600;
+            color: #c0392b;
+        }
+        
+        .calendar td.package-20day::after {
+            content: "20";
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.7rem;
+            background-color: #e74c3c;
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            line-height: 16px;
+        }
+        
+        .calendar td.package-liza {
+            background-color: rgba(52, 152, 219, 0.15);
+            font-weight: 600;
+            color: #2980b9;
+        }
+        
+        .calendar td.package-liza::after {
+            content: "Л";
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.7rem;
+            background-color: #3498db;
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            line-height: 16px;
+        }
+        
+        .calendar td.both-packages {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 50%, rgba(52, 152, 219, 0.15) 50%);
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .calendar td.both-packages::after {
+            content: "20Л";
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.6rem;
+            background: linear-gradient(135deg, #e74c3c 50%, #3498db 50%);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            line-height: 18px;
         }
         
         .calendar td.other-month {
@@ -122,11 +260,11 @@
             flex-wrap: wrap;
             gap: 20px;
             margin-top: 30px;
-            padding: 15px;
+            padding: 20px;
             background-color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -143,13 +281,48 @@
             border-radius: 4px;
         }
         
-        .today-color {
-            background-color: #4a6fa5;
+        .legend-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
         
         .weekend-color {
             background-color: #ffebee;
             border: 1px solid #e74c3c;
+        }
+        
+        .package-20day-color {
+            background-color: rgba(231, 76, 60, 0.15);
+            border: 1px solid #e74c3c;
+        }
+        
+        .package-20day-badge {
+            background-color: #e74c3c;
+        }
+        
+        .package-liza-color {
+            background-color: rgba(52, 152, 219, 0.15);
+            border: 1px solid #3498db;
+        }
+        
+        .package-liza-badge {
+            background-color: #3498db;
+        }
+        
+        .both-packages-color {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 50%, rgba(52, 152, 219, 0.15) 50%);
+            border: 1px solid #9b59b6;
+        }
+        
+        .both-packages-badge {
+            background: linear-gradient(135deg, #e74c3c 50%, #3498db 50%);
         }
         
         footer {
@@ -168,7 +341,15 @@
             }
             
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.8rem;
+            }
+            
+            .packages {
+                flex-direction: column;
+            }
+            
+            .package {
+                min-width: 100%;
             }
         }
         
@@ -190,30 +371,66 @@
 <body>
     <div class="container">
         <header>
-            <h1>Календарь на 2026 год</h1>
-            <div class="year-label">Все 12 месяцев в одном представлении</div>
+            <h1>Календарь на 2026 год с пакетами дней</h1>
+            <div class="year-label">Выделены пакет из 20 дней и занятия Лизы</div>
         </header>
         
         <main>
+            <div class="description">
+                <p>В этом календаре выделены два набора дат:</p>
+                <ul>
+                    <li><strong>Пакет из 20 рабочих дней</strong> (исключая выходные) с 09.02.2026 по 06.03.2026</li>
+                    <li><strong>8 занятий Лизы</strong> (по понедельникам и четвергам) с 09.02.2026 по 05.03.2026</li>
+                </ul>
+            </div>
+            
+            <div class="packages">
+                <div class="package package-20days">
+                    <h3>Пакет из 20 рабочих дней</h3>
+                    <div class="package-dates" id="package20Dates">
+                        <!-- Даты будут заполнены JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="package package-liza">
+                    <h3>8 занятий Лизы</h3>
+                    <div class="package-dates" id="packageLizaDates">
+                        <!-- Даты будут заполнены JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Календарь на 2026 год</h2>
             <div class="calendar-grid" id="calendar-container">
                 <!-- Календари месяцев будут вставлены здесь -->
             </div>
             
             <div class="legend">
                 <div class="legend-item">
-                    <div class="legend-color today-color"></div>
-                    <span>Текущий день (если 2026 год)</span>
-                </div>
-                <div class="legend-item">
                     <div class="legend-color weekend-color"></div>
                     <span>Выходные дни</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color package-20day-color"></div>
+                    <div class="legend-badge package-20day-badge">20</div>
+                    <span>День из пакета 20 дней</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color package-liza-color"></div>
+                    <div class="legend-badge package-liza-badge">Л</div>
+                    <span>Занятие Лизы</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color both-packages-color"></div>
+                    <div class="legend-badge both-packages-badge">20Л</div>
+                    <span>Оба события в один день</span>
                 </div>
             </div>
         </main>
         
         <footer>
             <p>Календарь создан с использованием HTML, CSS и JavaScript</p>
-            <p>© 2026 Календарь на весь год</p>
+            <p>© 2026 Календарь с выделенными пакетами дней</p>
         </footer>
     </div>
 
@@ -231,11 +448,19 @@
         // Год для календаря
         const year = 2026;
         
-        // Получаем текущую дату
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
-        const currentMonth = currentDate.getMonth();
-        const currentDay = currentDate.getDate();
+        // Пакет из 20 рабочих дней (исключая выходные)
+        const package20Days = [
+            "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13",
+            "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20",
+            "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27",
+            "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06"
+        ];
+        
+        // Занятия Лизы (по понедельникам и четвергам)
+        const packageLiza = [
+            "2026-02-09", "2026-02-12", "2026-02-16", "2026-02-19",
+            "2026-02-23", "2026-02-26", "2026-03-02", "2026-03-05"
+        ];
         
         // Функция для получения количества дней в месяце
         function getDaysInMonth(year, month) {
@@ -247,6 +472,58 @@
             const firstDay = new Date(year, month, 1).getDay();
             // Преобразуем воскресенье (0) в 6, чтобы неделя начиналась с понедельника
             return firstDay === 0 ? 6 : firstDay - 1;
+        }
+        
+        // Функция для форматирования даты в формате YYYY-MM-DD
+        function formatDate(year, month, day) {
+            return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        }
+        
+        // Функция для проверки, входит ли дата в пакет из 20 дней
+        function isInPackage20Days(year, month, day) {
+            const dateStr = formatDate(year, month, day);
+            return package20Days.includes(dateStr);
+        }
+        
+        // Функция для проверки, входит ли дата в занятия Лизы
+        function isInPackageLiza(year, month, day) {
+            const dateStr = formatDate(year, month, day);
+            return packageLiza.includes(dateStr);
+        }
+        
+        // Функция для создания списка дат пакета
+        function createPackageDatesList(packageDates, title) {
+            let html = '';
+            let dayNumber = 1;
+            
+            for (let i = 0; i < packageDates.length; i++) {
+                const dateStr = packageDates[i];
+                const date = new Date(dateStr);
+                const dayOfWeek = dayNames[date.getDay() === 0 ? 6 : date.getDay() - 1];
+                const dateFormatted = `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}.${date.getFullYear()}`;
+                
+                html += `<div class="package-date-item">`;
+                
+                if (title === "20 дней") {
+                    html += `${dayOfWeek} ${dateFormatted} (день ${dayNumber})`;
+                    dayNumber++;
+                    
+                    // Добавляем примечания о пропущенных выходных
+                    if (dateStr === "2026-02-16") {
+                        html += ` — пропущены 14–15 (сб–вс)`;
+                    } else if (dateStr === "2026-02-23") {
+                        html += ` — пропущены 21–22 (сб–вс)`;
+                    } else if (dateStr === "2026-03-02") {
+                        html += ` — пропущены 28.02 (сб) и 01.03 (вс)`;
+                    }
+                } else {
+                    html += `${dayOfWeek} ${dateFormatted}`;
+                }
+                
+                html += `</div>`;
+            }
+            
+            return html;
         }
         
         // Функция для создания календаря на месяц
@@ -296,11 +573,18 @@
                     // Добавляем текущий день месяца
                     else {
                         const isWeekend = dayOfWeek === 5 || dayOfWeek === 6; // 5 = суббота, 6 = воскресенье
-                        const isToday = year === currentYear && month === currentMonth && dayCounter === currentDay;
+                        const inPackage20Days = isInPackage20Days(year, month, dayCounter);
+                        const inPackageLiza = isInPackageLiza(year, month, dayCounter);
                         
                         let dayClass = "";
-                        if (isToday) dayClass += " today";
                         if (isWeekend) dayClass += " weekend";
+                        if (inPackage20Days && inPackageLiza) {
+                            dayClass += " both-packages";
+                        } else if (inPackage20Days) {
+                            dayClass += " package-20day";
+                        } else if (inPackageLiza) {
+                            dayClass += " package-liza";
+                        }
                         
                         calendarHTML += `<td class="${dayClass}">${dayCounter}</td>`;
                         dayCounter++;
@@ -334,6 +618,10 @@
             for (let month = 0; month < 12; month++) {
                 calendarContainer.innerHTML += createMonthCalendar(year, month);
             }
+            
+            // Заполняем списки дат для пакетов
+            document.getElementById("package20Dates").innerHTML = createPackageDatesList(package20Days, "20 дней");
+            document.getElementById("packageLizaDates").innerHTML = createPackageDatesList(packageLiza, "Лизы");
         }
         
         // Создаем календарь при загрузке страницы
