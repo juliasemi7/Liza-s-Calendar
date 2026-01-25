@@ -164,6 +164,25 @@
             </div>
         </div>
 
+       Вы правы, прошу прощения. Давайте разберемся по порядку.
+
+**Проблема:** У меня путаница с пустыми ячейками в начале календаря.
+
+**Ваша таблица февраля 2026:**
+```
+Пн Вт Ср Чт Пт Сб Вс
+                   1
+ 2  3  4  5  6  7  8
+ 9 10 11 12 13 14 15
+16 17 18 19 20 21 22
+23 24 25 26 27 28
+```
+
+1 февраля - воскресенье (последний день недели). Значит, перед 1 февраля должно быть 6 пустых ячеек (пн, вт, ср, чт, пт, сб).
+
+**Правильный код февраля:**
+
+```html
         <!-- Февраль 2026 -->
         <div class="month">
             <h2 class="month-title">Февраль 2026</h2>
@@ -176,87 +195,16 @@
                 <div class="day-name weekend">Сб</div>
                 <div class="day-name weekend">Вс</div>
 
-                <div class="day lesson-day highlight-day">2</div>
-                <div class="day highlight-day">3</div>
-                <div class="day highlight-day">4</div>
-                <div class="day lesson-day highlight-day">5</div>
-                <div class="day highlight-day">6</div>
-                <div class="day weekend">7</div>
-                <div class="day weekend">8</div>
-
-                <div class="day">9</div>
-                <div class="day">10</div>
-                <div class="day">11</div>
-                <div class="day">12</div>
-                <div class="day">13</div>
-                <div class="day weekend">14</div>
-                <div class="day weekend">15</div>
-
-                <div class="day">16</div>
-                <div class="day">17</div>
-                <div class="day">18</div>
-                <div class="day">19</div>
-                <div class="day">20</div>
-                <div class="day weekend">21</div>
-                <div class="day weekend">22</div>
-
-                <div class="day">23</div>
-                <div class="day">24</div>
-                <div class="day">25</div>
-                <div class="day">26</div>
-                <div class="day">27</div>
-                <div class="day weekend">28</div>
+                <!-- 1 февраля - воскресенье, значит перед ним 6 пустых дней -->
                 <div class="day empty"></div>
-            </div>
-        </div>
-          <!-- Февраль 2026 -->
-        <div class="month">
-            <h2 class="month-title">Февраль 2026</h2>
-            <div class="calendar-grid">
-                <div class="day-name">Пн</div>
-                <div class="day-name">Вт</div>
-                <div class="day-name">Ср</div>
-                <div class="day-name">Чт</div>
-                <div class="day-name">Пт</div>
-                <div class="day-name weekend">Сб</div>
-                <div class="day-name weekend">Вс</div>
-
                 <div class="day empty"></div>
                 <div class="day empty"></div>
                 <div class="day empty"></div>
                 <div class="day empty"></div>
                 <div class="day empty"></div>
                 <div class="day weekend">1</div>
-                <div class="day">2</div>
 
+                <!-- Вторая строка: 2-8 февраля -->
+                <div class="day">2</div>
                 <div class="day">3</div>
                 <div class="day">4</div>
-                <div class="day">5</div>
-                <div class="day">6</div>
-                <div class="day">7</div>
-                <div class="day weekend">8</div>
-                <div class="day lesson-day highlight-day">9</div>
-
-                <div class="day highlight-day">10</div>
-                <div class="day highlight-day">11</div>
-                <div class="day lesson-day highlight-day">12</div>
-                <div class="day highlight-day">13</div>
-                <div class="day weekend">14</div>
-                <div class="day weekend">15</div>
-
-                <div class="day lesson-day highlight-day">16</div>
-                <div class="day highlight-day">17</div>
-                <div class="day highlight-day">18</div>
-                <div class="day lesson-day highlight-day">19</div>
-                <div class="day highlight-day">20</div>
-                <div class="day weekend">21</div>
-                <div class="day weekend">22</div>
-
-                <div class="day lesson-day highlight-day">23</div>
-                <div class="day highlight-day">24</div>
-                <div class="day highlight-day">25</div>
-                <div class="day lesson-day highlight-day">26</div>
-                <div class="day highlight-day">27</div>
-                <div class="day weekend">28</div>
-            </div>
-        </div>
