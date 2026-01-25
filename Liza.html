@@ -97,9 +97,10 @@
             font-size: 0.8em;
             font-style: normal;
         }
+        /* Хайлайт стал нежно-голубым */
         .highlight-day {
-            background-color: #fffacd !important;
-            box-shadow: inset 0 0 0 2px #ffd700;
+            background-color: #e8f7ff !important; /* Нежно-голубой фон */
+            box-shadow: inset 0 0 0 2px #87ceeb;   /* Голубая рамка */
             font-weight: 600;
         }
         .empty {
@@ -222,15 +223,16 @@
             });
         });
         
+        // Обновленный цвет при наведении для нежно-голубого хайлайта
         document.querySelectorAll('.highlight-day').forEach(day => {
             day.addEventListener('mouseenter', function() {
                 if(!this.classList.contains('lesson-day')) {
-                    this.style.backgroundColor = '#fff176';
+                    this.style.backgroundColor = '#d4edff'; /* Более насыщенный голубой при наведении */
                 }
             });
             day.addEventListener('mouseleave', function() {
                 if(!this.classList.contains('lesson-day')) {
-                    this.style.backgroundColor = '#fffacd';
+                    this.style.backgroundColor = '#e8f7ff'; /* Возвращаем нежно-голубой */
                 }
             });
         });
