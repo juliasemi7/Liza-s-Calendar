@@ -209,7 +209,224 @@
                 <div class="day empty"></div>
             </div>
         </div>
+            <!-- Март 2026 -->
+        <div class="month">
+            <h2 class="month-title">Март 2026</h2>
+            <div class="calendar-grid">
+                <div class="day-name">Пн</div>
+                <div class="day-name">Вт</div>
+                <div class="day-name">Ср</div>
+                <div class="day-name">Чт</div>
+                <div class="day-name">Пт</div>
+                <div class="day-name weekend">Сб</div>
+                <div class="day-name weekend">Вс</div>
+
+                <div class="day highlight-day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day lesson-day highlight-day">5</div>
+                <div class="day highlight-day">6</div>
+                <div class="day weekend">7</div>
+                <div class="day weekend">8</div>
+
+                <div class="day highlight-day">9</div>
+                <div class="day highlight-day">10</div>
+                <div class="day highlight-day">11</div>
+                <div class="day highlight-day">12</div>
+                <div class="day highlight-day">13</div>
+                <div class="day weekend">14</div>
+                <div class="day weekend">15</div>
+
+                <div class="day">16</div>
+                <div class="day">17</div>
+                <div class="day">18</div>
+                <div class="day">19</div>
+                <div class="day">20</div>
+                <div class="day weekend">21</div>
+                <div class="day weekend">22</div>
+
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+                <div class="day">26</div>
+                <div class="day">27</div>
+                <div class="day weekend">28</div>
+                <div class="day weekend">29</div>
+
+                <div class="day">30</div>
+                <div class="day">31</div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+            </div>
+        </div>
+
+        <!-- Апрель 2026 -->
+        <div class="month">
+            <h2 class="month-title">Апрель 2026</h2>
+            <div class="calendar-grid">
+                <div class="day-name">Пн</div>
+                <div class="day-name">Вт</div>
+                <div class="day-name">Ср</div>
+                <div class="day-name">Чт</div>
+                <div class="day-name">Пт</div>
+                <div class="day-name weekend">Сб</div>
+                <div class="day-name weekend">Вс</div>
+
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day">5</div>
+                <div class="day weekend">6</div>
+                <div class="day weekend">7</div>
+
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day">10</div>
+                <div class="day">11</div>
+                <div class="day">12</div>
+                <div class="day weekend">13</div>
+                <div class="day weekend">14</div>
+
+                <div class="day">15</div>
+                <div class="day">16</div>
+                <div class="day">17</div>
+                <div class="day">18</div>
+                <div class="day">19</div>
+                <div class="day weekend">20</div>
+                <div class="day weekend">21</div>
+
+                <div class="day">22</div>
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+                <div class="day">26</div>
+                <div class="day weekend">27</div>
+                <div class="day weekend">28</div>
+
+                <div class="day">29</div>
+                <div class="day">30</div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+                <div class="day empty"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Стили для чередования цветов пакетов -->
+    <style>
+        /* Светло-синий цвет для первого 20-дневного периода (с 9 февраля по 6 марта) */
+        /* Стиль .highlight-day уже применён в январе-феврале-марте и имеет светло-голубой цвет */
+        
+        /* Светло-синий цвет для следующего 20-дневного периода (с 9 марта по 3 апреля) */
+        .highlight-day.period-skyblue {
+            background-color: #e0f7ff !important; /* Светло-синий фон */
+            box-shadow: inset 0 0 0 2px #4fc3f7;   /* Более насыщенная голубая рамка */
+        }
+        
+        /* Светло-голубой цвет для следующего 20-дневного периода (с 4 апреля по 1 мая) */
+        .highlight-day.period-lightblue {
+            background-color: #e8f7ff !important; /* Светло-голубой фон (как было) */
+            box-shadow: inset 0 0 0 2px #87ceeb;   /* Голубая рамка (как было) */
+        }
+    </style>
+
+    <!-- JavaScript для чередования цветов пакетов по 20 дней -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Начальная дата первого пакета (9 февраля 2026)
+            const startDate = new Date(2026, 1, 9); // Месяцы 0-indexed: 1 = февраль
+            const today = new Date(2026, 0, 1); // 1 января 2026 как точка отсчёта
+            
+            // Функция для вычисления номера пакета для заданной даты
+            function getPackageNumber(date) {
+                // Разница в днях от начальной даты
+                const diffTime = date.getTime() - startDate.getTime();
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                
+                // Если дата раньше начальной, возвращаем 0 (до первого пакета)
+                if (diffDays < 0) return 0;
+                
+                // Каждый пакет - 20 рабочих дней, но для упрощения будем считать календарные дни
+                // с поправкой на то, что в реальности нужно считать именно рабочие дни
+                // Для демонстрации используем 28 календарных дней для 20 рабочих дней
+                const packageNumber = Math.floor(diffDays / 28) + 1;
+                return packageNumber;
+            }
+            
+            // Функция для определения цвета пакета
+            function getPackageColor(packageNumber) {
+                if (packageNumber === 0) return ''; // До первого пакета
+                
+                // Чередование цветов: нечетные - светло-синий, четные - светло-голубой
+                return packageNumber % 2 === 1 ? 'period-skyblue' : 'period-lightblue';
+            }
+            
+            // Применяем цвета ко всем выделенным дням
+            const highlightDays = document.querySelectorAll('.highlight-day:not(.empty)');
+            highlightDays.forEach(dayElement => {
+                const dayText = dayElement.textContent.trim();
+                if (!dayText) return;
+                
+                // Определяем месяц и год для этого дня
+                let monthElement = dayElement.closest('.month');
+                let monthTitle = monthElement.querySelector('.month-title').textContent;
+                let monthYear = monthTitle.split(' ')[1]; // "2026"
+                let monthName = monthTitle.split(' ')[0]; // "Январь"
+                
+                // Преобразуем название месяца в номер
+                const monthNames = {
+                    'Январь': 0, 'Февраль': 1, 'Март': 2, 'Апрель': 3,
+                    'Май': 4, 'Июнь': 5, 'Июль': 6, 'Август': 7,
+                    'Сентябрь': 8, 'Октябрь': 9, 'Ноябрь': 10, 'Декабрь': 11
+                };
+                
+                const monthNum = monthNames[monthName];
+                const year = parseInt(monthYear);
+                const dayNum = parseInt(dayText);
+                
+                // Создаем дату для этого дня
+                const dayDate = new Date(year, monthNum, dayNum);
+                
+                // Получаем номер пакета и цвет
+                const packageNum = getPackageNumber(dayDate);
+                const packageColor = getPackageColor(packageNum);
+                
+                // Применяем класс с цветом, если пакет начался
+                if (packageColor) {
+                    dayElement.classList.add(packageColor);
+                }
+            });
+            
+            // Информационная панель для отладки (можно удалить в финальной версии)
+            const infoDiv = document.createElement('div');
+            infoDiv.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: white;
+                padding: 10px;
+                border-radius: 5px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                font-size: 12px;
+                z-index: 1000;
+                max-width: 200px;
+            `;
+            infoDiv.innerHTML = `<strong>Чередование цветов пакетов</strong><br>
+            • 20-дневные периоды (рабочие дни)<br>
+            • 1-й период: светло-голубой<br>
+            • 2-й период: светло-синий<br>
+            • 3-й период: светло-голубой<br>
+            • и т.д.`;
+            document.body.appendChild(infoDiv);
+        });
+    </script>
+        </div>
     <!-- JavaScript полностью удалён - хайлайт остаётся нежно-голубым -->
 </body>
 </html>
