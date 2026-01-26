@@ -111,9 +111,16 @@
             background-color: #FFF9F0; /* Очень светлый чистый бежевый */
         }
         
-        /* Более темно-голубой для пакета */
-        .calendar td.package-20day {
-            background-color: rgba(100, 149, 237, 0.3); /* Более темно-голубой - CornflowerBlue */
+        /* Первый пакет 20 дней (январь-февраль) - светло-зеленый */
+        .calendar td.package-20day-jan {
+            background-color: rgba(144, 238, 144, 0.4); /* Светло-зеленый - LightGreen */
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* Второй пакет 20 дней (февраль-март) - темно-голубой */
+        .calendar td.package-20day-feb {
+            background-color: rgba(100, 149, 237, 0.3); /* Темно-голубой - CornflowerBlue */
             font-weight: 600;
             color: #2c3e50;
         }
@@ -122,16 +129,24 @@
         .calendar td.package-liza {
             font-weight: 700;
             color: #2c3e50;
-            border: 2px solid #1e6bb8; /* Более темный синий для обводки */
+            border: 2px solid #1e6bb8; /* Темный синий для обводки */
             background-color: white;
         }
         
-        /* Комбинация для дней с обоими событиями */
-        .calendar td.both-packages {
-            background-color: rgba(100, 149, 237, 0.3); /* Более темно-голубой фон */
+        /* Комбинация для дней с обоими событиями (первый пакет + Лиза) */
+        .calendar td.both-packages-jan {
+            background-color: rgba(144, 238, 144, 0.4); /* Светло-зеленый фон */
             font-weight: 700;
             color: #2c3e50;
-            border: 2px solid #1e6bb8; /* Более темный синий для обводки */
+            border: 2px solid #1e6bb8; /* Темный синий для обводки */
+        }
+        
+        /* Комбинация для дней с обоими событиями (второй пакет + Лиза) */
+        .calendar td.both-packages-feb {
+            background-color: rgba(100, 149, 237, 0.3); /* Темно-голубой фон */
+            font-weight: 700;
+            color: #2c3e50;
+            border: 2px solid #1e6bb8; /* Темный синий для обводки */
         }
         
         .calendar td.other-month {
@@ -148,7 +163,7 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            max-width: 800px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -177,19 +192,29 @@
             border: 1px solid #e74c3c;
         }
         
-        .package-20day-color {
-            background-color: rgba(100, 149, 237, 0.3); /* Более темно-голубой */
+        .package-20day-jan-color {
+            background-color: rgba(144, 238, 144, 0.4); /* Светло-зеленый */
+            border: 1px solid #90EE90;
+        }
+        
+        .package-20day-feb-color {
+            background-color: rgba(100, 149, 237, 0.3); /* Темно-голубой */
             border: 1px solid #6495ED;
         }
         
         .package-liza-color {
             background-color: white;
-            border: 2px solid #1e6bb8; /* Более темный синий */
+            border: 2px solid #1e6bb8; /* Темный синий */
         }
         
-        .both-packages-color {
-            background-color: rgba(100, 149, 237, 0.3); /* Более темно-голубой */
-            border: 2px solid #1e6bb8; /* Более темный синий */
+        .both-packages-jan-color {
+            background-color: rgba(144, 238, 144, 0.4); /* Светло-зеленый */
+            border: 2px solid #1e6bb8; /* Темный синий */
+        }
+        
+        .both-packages-feb-color {
+            background-color: rgba(100, 149, 237, 0.3); /* Темно-голубой */
+            border: 2px solid #1e6bb8; /* Темный синий */
         }
         
         footer {
@@ -209,6 +234,12 @@
             
             h1 {
                 font-size: 1.8rem;
+            }
+            
+            .legend {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
             }
         }
         
@@ -245,16 +276,24 @@
                     <span>Выходные дни</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-color package-20day-color"></div>
-                    <span>День из пакета 20 дней</span>
+                    <div class="legend-color package-20day-jan-color"></div>
+                    <span>Пакет 20 дней (январь-февраль)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color package-20day-feb-color"></div>
+                    <span>Пакет 20 дней (февраль-март)</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-border package-liza-color"></div>
                     <span>Занятие Лизы</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-border both-packages-color"></div>
-                    <span>Оба события в один день</span>
+                    <div class="legend-border both-packages-jan-color"></div>
+                    <span>Оба события (1-й пакет + Лиза)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-border both-packages-feb-color"></div>
+                    <span>Оба события (2-й пакет + Лиза)</span>
                 </div>
             </div>
         </main>
@@ -279,7 +318,7 @@
         // Год для календаря
         const year = 2026;
         
-        // Пакет из 20 рабочих дней (январь-февраль)
+        // Пакет из 20 рабочих дней (январь-февраль) - светло-зеленый
         const package20DaysJan = [
             "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16",
             "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23",
@@ -287,16 +326,13 @@
             "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06"
         ];
         
-        // Пакет из 20 рабочих дней (февраль-март)
+        // Пакет из 20 рабочих дней (февраль-март) - темно-голубой
         const package20DaysFeb = [
             "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13",
             "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20",
             "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27",
             "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06"
         ];
-        
-        // Объединяем оба пакета
-        const package20Days = [...package20DaysJan, ...package20DaysFeb];
         
         // Занятия Лизы (январь-февраль)
         const packageLizaJan = [
@@ -330,10 +366,16 @@
             return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         }
         
-        // Функция для проверки, входит ли дата в пакет из 20 дней
-        function isInPackage20Days(year, month, day) {
+        // Функция для проверки, входит ли дата в пакет из 20 дней (январь-февраль)
+        function isInPackage20DaysJan(year, month, day) {
             const dateStr = formatDate(year, month, day);
-            return package20Days.includes(dateStr);
+            return package20DaysJan.includes(dateStr);
+        }
+        
+        // Функция для проверки, входит ли дата в пакет из 20 дней (февраль-март)
+        function isInPackage20DaysFeb(year, month, day) {
+            const dateStr = formatDate(year, month, day);
+            return package20DaysFeb.includes(dateStr);
         }
         
         // Функция для проверки, входит ли дата в занятия Лизы
@@ -389,15 +431,22 @@
                     // Добавляем текущий день месяца
                     else {
                         const isWeekend = dayOfWeek === 5 || dayOfWeek === 6; // 5 = суббота, 6 = воскресенье
-                        const inPackage20Days = isInPackage20Days(year, month, dayCounter);
+                        const inPackage20DaysJan = isInPackage20DaysJan(year, month, dayCounter);
+                        const inPackage20DaysFeb = isInPackage20DaysFeb(year, month, dayCounter);
                         const inPackageLiza = isInPackageLiza(year, month, dayCounter);
                         
                         let dayClass = "";
                         if (isWeekend) dayClass += " weekend";
-                        if (inPackage20Days && inPackageLiza) {
-                            dayClass += " both-packages";
-                        } else if (inPackage20Days) {
-                            dayClass += " package-20day";
+                        
+                        // Проверяем комбинации событий
+                        if (inPackage20DaysJan && inPackageLiza) {
+                            dayClass += " both-packages-jan";
+                        } else if (inPackage20DaysFeb && inPackageLiza) {
+                            dayClass += " both-packages-feb";
+                        } else if (inPackage20DaysJan) {
+                            dayClass += " package-20day-jan";
+                        } else if (inPackage20DaysFeb) {
+                            dayClass += " package-20day-feb";
                         } else if (inPackageLiza) {
                             dayClass += " package-liza";
                         }
