@@ -110,35 +110,30 @@
             background-color: #FFF9F0;
         }
         
-        /* 1-й пакет: январь-февраль (светло-зеленый) */
         .calendar td.package-20day-1 {
             background-color: rgba(144, 238, 144, 0.4);
             font-weight: 600;
             color: #2c3e50;
         }
         
-        /* 2-й пакет: февраль-март (голубой) */
         .calendar td.package-20day-2 {
             background-color: rgba(173, 216, 230, 0.5);
             font-weight: 600;
             color: #2c3e50;
         }
         
-        /* 3-й пакет: март-апрель (персиковый) */
         .calendar td.package-20day-3 {
             background-color: rgba(255, 218, 185, 0.6);
             font-weight: 600;
             color: #2c3e50;
         }
         
-        /* 4-й пакет: апрель-май (фиолетовый) */
         .calendar td.package-20day-4 {
             background-color: rgba(216, 191, 216, 0.6);
             font-weight: 600;
             color: #2c3e50;
         }
         
-        /* 5-й пакет: май-июнь (бирюзовый) */
         .calendar td.package-20day-5 {
             background-color: rgba(64, 224, 208, 0.4);
             font-weight: 600;
@@ -365,7 +360,6 @@
         ];
         
         // 5-й ПАКЕТ: 4 мая - 29 мая (бирюзовый)
-        // Пропущен 11 мая (праздник)
         const package20Days5 = [
             "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08",
             "2026-05-12", "2026-05-13", "2026-05-14", "2026-05-15",
@@ -374,6 +368,7 @@
         ];
         
         // ЗАНЯТИЯ ЛИЗЫ - ПОНЕДЕЛЬНИК И ЧЕТВЕРГ
+        // 12 мая убрано, добавлено 1 июня
         const packageLiza = [
             // 1-й пакет
             "2026-01-12", "2026-01-15", "2026-01-19", "2026-01-22",
@@ -392,8 +387,8 @@
             "2026-04-20", "2026-04-23", "2026-04-27", "2026-04-30",
             
             // 5-й пакет (май-июнь) - 8 занятий
-            "2026-05-04", "2026-05-07", "2026-05-12", "2026-05-14",
-            "2026-05-18", "2026-05-21", "2026-05-25", "2026-05-28"
+            "2026-05-04", "2026-05-07", "2026-05-14", "2026-05-18",
+            "2026-05-21", "2026-05-25", "2026-05-28", "2026-06-01"
         ];
         
         function getDaysInMonth(year, month) {
@@ -437,14 +432,14 @@
             const daysInMonth = getDaysInMonth(year, month);
             const firstDayIndex = getFirstDayOfMonth(year, month);
             
-            let html = `<div class="month-container"><div class="month-header">${monthNames[month]} ${year}</div><table class="calendar"><thead></tr>`;
+            let html = `<div class="month-container"><div class="month-header">${monthNames[month]} ${year}</div><table class="calendar"><thead><tr>`;
             
             for (let day of dayNames) {
                 const isWeekend = day === "Сб" || day === "Вс";
                 html += `<th${isWeekend ? ' style="color:#e74c3c;"' : ''}>${day}</th>`;
             }
             
-            html += `<tr></thead><tbody>`;
+            html += `</table></thead><tbody>`;
             
             let dayCounter = 1;
             
@@ -488,7 +483,7 @@
                     }
                 }
                 
-                html += "</td>";
+                html += "</tr>";
                 if (dayCounter > daysInMonth) break;
             }
             
