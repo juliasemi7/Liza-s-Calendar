@@ -217,7 +217,6 @@
         "2026-04-27","2026-04-28","2026-04-29","2026-04-30"
     ];
 
-    // НОВЫЙ ПАКЕТ 5: 12.05 – 08.06 (коралловый)
     const pkg5 = [
         "2026-05-12","2026-05-13","2026-05-14","2026-05-15",
         "2026-05-18","2026-05-19","2026-05-20","2026-05-21","2026-05-22",
@@ -236,23 +235,32 @@
         "2026-03-23","2026-03-26","2026-03-30","2026-04-02",
         "2026-04-06","2026-04-09","2026-04-13","2026-04-16",
         "2026-04-20","2026-04-23","2026-04-27","2026-04-30",
-        // пакет 5 (8 занятий)
         "2026-05-14","2026-05-18","2026-05-21","2026-05-25",
         "2026-05-28","2026-06-01","2026-06-04","2026-06-08"
     ];
 
-    function getDaysInMonth(y,m) { return new Date(y, m+1, 0).getDate(); }
-    function getStartOffset(y,m) { const d = new Date(y,m,1).getDay(); return d === 0 ? 6 : d-1; }
-    function formatDate(y,m,d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+    // --------------------------------------------------------------
+    function getDaysInMonth(y, m) {
+        return new Date(y, m + 1, 0).getDate();
+    }
 
-    function getCellClass(dateStr, y,m,d) {
+    function getStartOffset(y, m) {
+        const firstDay = new Date(y, m, 1).getDay();
+        return firstDay === 0 ? 6 : firstDay - 1;
+    }
+
+    function formatDate(y, m, d) {
+        return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    }
+
+    function getCellClass(dateStr, y, m, d) {
         const in1 = pkg1.includes(dateStr);
         const in2 = pkg2.includes(dateStr);
         const in3 = pkg3.includes(dateStr);
         const in4 = pkg4.includes(dateStr);
         const in5 = pkg5.includes(dateStr);
         const isLesson = lessons.includes(dateStr);
-        const isWeekend = (new Date(y,m,d).getDay() === 0 || new Date(y,m,d).getDay() === 6);
+        const isWeekend = (new Date(y, m, d).getDay() === 0 || new Date(y, m, d).getDay() === 6);
 
         if (in1 && isLesson) return "both1";
         if (in2 && isLesson) return "both2";
@@ -288,18 +296,18 @@
 
             let day = 1;
             for (let i = 0; i < totalCells; i++) {
-                if (i % 7 === 0) html += "</tr>";
+                if (i % 7 === 0) html += "<tr>";
                 if (i >= startOffset && day <= daysInMonth) {
                     const dateStr = formatDate(year, m, day);
                     const cls = getCellClass(dateStr, year, m, day);
                     html += `<td class="${cls}">${day}</td>`;
                     day++;
                 } else {
-                    let pm = m === 0 ? 11 : m-1;
-                    let py = m === 0 ? year-1 : year;
-                    let prevDays = getDaysInMonth(py, pm);
-                    let prevDay = prevDays - (startOffset - i - 1);
-                    html += `<td class="other-month">${prevDay}<tr>`;
+                    const prevMonth = m === 0 ? 11 : m - 1;
+                    const prevYear = m === 0 ? year - 1 : year;
+                    const prevMonthDays = getDaysInMonth(prevYear, prevMonth);
+                    const prevDay = prevMonthDays - (startOffset - i - 1);
+                    html += `<td class="other-month">${prevDay}</td>`;
                 }
                 if (i % 7 === 6) html += "</tr>";
             }
