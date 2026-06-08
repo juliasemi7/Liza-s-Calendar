@@ -228,7 +228,6 @@
         "2026-05-25","2026-05-26","2026-05-27","2026-05-28","2026-05-29"
     ];
 
-    // НОВЫЙ ПАКЕТ 6: 04.06 – 01.07 (светло-голубой)
     const pkg6 = [
         "2026-06-04","2026-06-05",
         "2026-06-08","2026-06-09","2026-06-10","2026-06-11","2026-06-12",
@@ -249,14 +248,23 @@
         "2026-04-20","2026-04-23","2026-04-27","2026-04-30",
         "2026-05-04","2026-05-07","2026-05-11","2026-05-14",
         "2026-05-18","2026-05-21","2026-05-25","2026-05-28",
-        // пакет 6 (8 занятий)
         "2026-06-04","2026-06-08","2026-06-11","2026-06-15",
         "2026-06-18","2026-06-22","2026-06-25","2026-06-29"
     ];
 
-    function getDaysInMonth(y,m) { return new Date(y, m+1, 0).getDate(); }
-    function getStartOffset(y,m) { const d = new Date(y,m,1).getDay(); return d === 0 ? 6 : d-1; }
-    function formatDate(y,m,d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+    // ---------- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----------
+    function getDaysInMonth(y,m) {
+        return new Date(y, m+1, 0).getDate();
+    }
+
+    function getStartOffset(y,m) {
+        const d = new Date(y, m, 1).getDay();
+        return d === 0 ? 6 : d-1;
+    }
+
+    function formatDate(y,m,d) {
+        return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    }
 
     function getCellClass(dateStr, y,m,d) {
         const in1 = pkg1.includes(dateStr);
@@ -295,7 +303,7 @@
             const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
 
             let html = `<div class="month-card"><div class="month-title">${months[m]} ${year}</div>
-                        <table class="calendar-table"><thead><tr>`;
+                        <table class="calendar-table"><thead></table>`;
             for (let w of weekDays) {
                 const isW = (w === "Сб" || w === "Вс");
                 html += `<th${isW ? ' style="color:#e74c3c;"' : ''}>${w}</th>`;
@@ -314,12 +322,18 @@
                     const prevMonth = m === 0 ? 11 : m-1;
                     const prevYear = m === 0 ? year-1 : year;
                     const prevMonthDays = getDaysInMonth(prevYear, prevMonth);
-                    const prevDay = prevMonthDays - (startOffset - i - 1);
+                    let prevDay = prevMonthDays - (startOffset - i - 1);
+                    if (prevDay <= 0) {
+                        const prevPrevMonth = prevMonth === 0 ? 11 : prevMonth-1;
+                        const prevPrevYear = prevMonth === 0 ? year-1 : prevYear;
+                        const prevPrevMonthDays = getDaysInMonth(prevPrevYear, prevPrevMonth);
+                        prevDay = prevPrevMonthDays + prevDay;
+                    }
                     html += `<td class="other-month">${prevDay}</td>`;
                 }
-                if (i % 7 === 6) html += "</tr>";
+                if (i % 7 === 6) html += "<tr>";
             }
-            html += `</tbody></tr></div>`;
+            html += `</tbody></table></div>`;
             container.innerHTML += html;
         }
     }
