@@ -3,195 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026</title>
+    <title>2026 — Liza's Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #faf5ff 100%);
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-primary: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --border-color: #f1f5f9;
+            
+            /* Светлые свежие цвета пакетов */
+            --p1-bg: #dcfce7; --p1-color: #15803d;
+            --p2-bg: #e0f2fe; --p2-color: #0369a1;
+            --p3-bg: #ffedd5; --p3-color: #c2410c;
+            --p4-bg: #f3e8ff; --p4-color: #7e22ce;
+            --p5-bg: #ffe4e6; --p5-color: #be123c;
+            --p6-bg: #dbeafe; --p6-color: #1d4ed8;
+            --p7-bg: #ccfbf1; --p7-color: #0f766e;
+            --p8-bg: #ffedd5; --p8-color: #9a3412; /* Рыжий Пакет 8 */
+            --p9-bg: #fce7f3; --p9-color: #9d174d;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 30px 15px 40px;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 20px;
         }
 
+        /* Шапка - светлая, минималистичная */
         header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #4a6fa5;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 800;
+            padding: 6px 22px;
+            border-radius: 9999px;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25);
         }
 
         h1 {
-            color: #2c3e50;
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            color: #0f172a;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 0;
         }
 
-        .year-label {
-            font-size: 1.3rem;
-            color: #4a6fa5;
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-
+        /* Сетка календаря */
         .calendar-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
         }
 
+        /* Карточка месяца - светлая и воздушная */
         .month-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 10px 30px -10px rgba(148, 163, 184, 0.12);
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
         }
 
         .month-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -10px rgba(59, 130, 246, 0.15);
+            border-color: #e2e8f0;
         }
 
+        /* Заголовок месяца - свежий нежно-голубой градиент */
         .month-title {
-            background: #4a6fa5;
-            color: white;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #0369a1;
             text-align: center;
-            padding: 14px;
-            font-size: 1.4rem;
-            font-weight: 600;
+            padding: 16px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            border-bottom: 1px solid #bae6fd;
         }
 
         .calendar-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 4px;
+            padding: 14px;
         }
 
         .calendar-table th {
-            padding: 12px 4px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: #2c5a7a;
-            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calendar-table th.weekend-header {
+            color: #f87171;
         }
 
         .calendar-table td {
             text-align: center;
-            padding: 10px 5px;
+            padding: 0;
+            height: 38px;
+            width: 38px;
             font-size: 0.9rem;
-            border-radius: 8px;
+            font-weight: 600;
+            border-radius: 10px;
+            vertical-align: middle;
+            transition: all 0.2s ease;
+            position: relative;
         }
 
+        /* Выходные */
         .weekend {
-            background-color: #fff5ef;
-            color: #c7362b;
-            font-weight: 500;
+            background-color: #fff1f2;
+            color: #f43f5e;
         }
 
         .other-month {
-            color: #bbb;
+            color: #e2e8f0;
+            font-weight: 400;
         }
 
-        .p1 { background-color: #d9f0d9; font-weight: 600; }
-        .p2 { background-color: #cae9ff; font-weight: 600; }
-        .p3 { background-color: #ffe0cc; font-weight: 600; }
-        .p4 { background-color: #e6e6fa; font-weight: 600; }
-        .p5 { background-color: #ffe0f0; font-weight: 600; }
-        .p6 { background-color: #c0e0ff; font-weight: 600; }
-        .p7 { background-color: #b0e0c0; font-weight: 600; }
-        .p8 { background-color: #ffd2b5; font-weight: 600; }
+        /* Пакеты */
+        .p1 { background-color: var(--p1-bg); color: var(--p1-color); }
+        .p2 { background-color: var(--p2-bg); color: var(--p2-color); }
+        .p3 { background-color: var(--p3-bg); color: var(--p3-color); }
+        .p4 { background-color: var(--p4-bg); color: var(--p4-color); }
+        .p5 { background-color: var(--p5-bg); color: var(--p5-color); }
+        .p6 { background-color: var(--p6-bg); color: var(--p6-color); }
+        .p7 { background-color: var(--p7-bg); color: var(--p7-color); }
+        .p8 { background-color: var(--p8-bg); color: var(--p8-color); }
+        .p9 { background-color: var(--p9-bg); color: var(--p9-color); }
 
-        .lesson {
-            border: 2px solid #1e6bb8;
-            font-weight: 700;
+        /* Занятия (Яркая синяя рамка и точка) */
+        .lesson-badge {
+            box-shadow: inset 0 0 0 2px #2563eb;
+            position: relative;
+            font-weight: 800 !important;
         }
 
-        .both1 { background-color: #d9f0d9; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both2 { background-color: #cae9ff; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both3 { background-color: #ffe0cc; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both4 { background-color: #e6e6fa; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both5 { background-color: #ffe0f0; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both6 { background-color: #c0e0ff; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both7 { background-color: #b0e0c0; border: 2px solid #1e6bb8; font-weight: 700; }
-        .both8 { background-color: #ffd2b5; border: 2px solid #1e6bb8; font-weight: 700; }
-
-        .legend {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-            padding: 20px;
-            background: white;
-            border-radius: 12px;
+        .lesson-badge::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 6px;
+            height: 6px;
+            background-color: #2563eb;
+            border-radius: 50%;
         }
-
-        .legend span {
-            display: inline-block;
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-
-        .l-week { background: #fff5ef; border: 1px solid #c7362b; }
-        .l-p1 { background: #d9f0d9; border: 1px solid #90EE90; }
-        .l-p2 { background: #cae9ff; border: 1px solid #ADD8E6; }
-        .l-p3 { background: #ffe0cc; border: 1px solid #FFDAB9; }
-        .l-p4 { background: #e6e6fa; border: 1px solid #E6E6FA; }
-        .l-p5 { background: #ffe0f0; border: 1px solid #FFB6C1; }
-        .l-p6 { background: #c0e0ff; border: 1px solid #80BFFF; }
-        .l-p7 { background: #b0e0c0; border: 1px solid #80BFFF; }
-        .l-p8 { background: #ffd2b5; border: 1px solid #FFA07A; }
-        .l-lesson { background: white; border: 2px solid #1e6bb8; }
 
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #777;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>2026</h1>
-        <div class="year-label">Liza's Calendar</div>
+        <span class="year-badge">2026</span>
+        <h1>Liza's Calendar</h1>
     </header>
 
     <div class="calendar-grid" id="calendarGrid"></div>
 
-    <div class="legend">
-        <div><span class="l-week"></span> Выходные</div>
-        <div><span class="l-p1"></span> Пакет 12.01 – 06.02</div>
-        <div><span class="l-p2"></span> Пакет 09.02 – 06.03</div>
-        <div><span class="l-p3"></span> Пакет 09.03 – 03.04</div>
-        <div><span class="l-p4"></span> Пакет 06.04 – 30.04</div>
-        <div><span class="l-p5"></span> Пакет 04.05 – 29.05</div>
-        <div><span class="l-p6"></span> Пакет 04.06 – 01.07</div>
-        <div><span class="l-p7"></span> Пакет 02.07 – 29.07</div>
-        <div><span class="l-p8"></span> Пакет 10.08 – 04.09</div>
-        <div><span class="l-lesson"></span> Занятие Лизы</div>
-    </div>
-
     <footer>
-        <p>Календарь создан с использованием HTML, CSS и JavaScript</p>
-        <p>© 2026 Календарь с выделенными пакетами дней</p>
+        <p>© 2026 Liza's Calendar</p>
     </footer>
 </div>
 
@@ -200,7 +218,7 @@
     const months = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
     const weekDays = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
 
-    // ---------- ПАКЕТЫ (20 дней) ----------
+    // ---------- ПАКЕТЫ ----------
     const pkg1 = [
         "2026-01-12","2026-01-13","2026-01-14","2026-01-15","2026-01-16",
         "2026-01-19","2026-01-20","2026-01-21","2026-01-22","2026-01-23",
@@ -252,6 +270,7 @@
         "2026-07-27","2026-07-28","2026-07-29"
     ];
 
+    // Рыжий Пакет 8 (10 августа – 4 сентября)
     const pkg8 = [
         "2026-08-10","2026-08-11","2026-08-12","2026-08-13","2026-08-14",
         "2026-08-17","2026-08-18","2026-08-19","2026-08-20","2026-08-21",
@@ -259,32 +278,34 @@
         "2026-08-31","2026-09-01","2026-09-02","2026-09-03","2026-09-04"
     ];
 
+    // Пакет 9 (7 сентября – 2 октября)
+    const pkg9 = [
+        "2026-09-07","2026-09-08","2026-09-09","2026-09-10","2026-09-11",
+        "2026-09-14","2026-09-15","2026-09-16","2026-09-17","2026-09-18",
+        "2026-09-21","2026-09-22","2026-09-23","2026-09-24","2026-09-25",
+        "2026-09-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02"
+    ];
+
     // ---------- ЗАНЯТИЯ ЛИЗЫ (понедельник + четверг) ----------
     const lessons = [
         // пакет 1
-        "2026-01-12","2026-01-15","2026-01-19","2026-01-22",
-        "2026-01-26","2026-01-29","2026-02-02","2026-02-05",
+        "2026-01-12","2026-01-15","2026-01-19","2026-01-22","2026-01-26","2026-01-29","2026-02-02","2026-02-05",
         // пакет 2
-        "2026-02-09","2026-02-12","2026-02-16","2026-02-19",
-        "2026-02-23","2026-02-26","2026-03-02","2026-03-05",
+        "2026-02-09","2026-02-12","2026-02-16","2026-02-19","2026-02-23","2026-02-26","2026-03-02","2026-03-05",
         // пакет 3
-        "2026-03-09","2026-03-12","2026-03-16","2026-03-19",
-        "2026-03-23","2026-03-26","2026-03-30","2026-04-02",
+        "2026-03-09","2026-03-12","2026-03-16","2026-03-19","2026-03-23","2026-03-26","2026-03-30","2026-04-02",
         // пакет 4
-        "2026-04-06","2026-04-09","2026-04-13","2026-04-16",
-        "2026-04-20","2026-04-23","2026-04-27","2026-04-30",
+        "2026-04-06","2026-04-09","2026-04-13","2026-04-16","2026-04-20","2026-04-23","2026-04-27","2026-04-30",
         // пакет 5
-        "2026-05-04","2026-05-07","2026-05-11","2026-05-14",
-        "2026-05-18","2026-05-21","2026-05-25","2026-05-28",
+        "2026-05-04","2026-05-07","2026-05-11","2026-05-14","2026-05-18","2026-05-21","2026-05-25","2026-05-28",
         // пакет 6
-        "2026-06-04","2026-06-08","2026-06-11","2026-06-15",
-        "2026-06-18","2026-06-22","2026-06-25","2026-06-29",
+        "2026-06-04","2026-06-08","2026-06-11","2026-06-15","2026-06-18","2026-06-22","2026-06-25","2026-06-29",
         // пакет 7
-        "2026-07-02","2026-07-06","2026-07-09","2026-07-13",
-        "2026-07-16","2026-07-20","2026-07-23","2026-07-27",
-        // пакет 8
-        "2026-08-10","2026-08-13","2026-08-17","2026-08-20",
-        "2026-08-24","2026-08-27","2026-08-31","2026-09-03"
+        "2026-07-02","2026-07-06","2026-07-09","2026-07-13","2026-07-16","2026-07-20","2026-07-23","2026-07-27",
+        // пакет 8 (рыжий)
+        "2026-08-10","2026-08-13","2026-08-17","2026-08-20","2026-08-24","2026-08-27","2026-08-31","2026-09-03",
+        // пакет 9
+        "2026-09-07","2026-09-10","2026-09-14","2026-09-17","2026-09-21","2026-09-24","2026-09-28","2026-10-01"
     ];
 
     function getDaysInMonth(y,m) { return new Date(y, m+1, 0).getDate(); }
@@ -300,28 +321,26 @@
         const in6 = pkg6.includes(dateStr);
         const in7 = pkg7.includes(dateStr);
         const in8 = pkg8.includes(dateStr);
+        const in9 = pkg9.includes(dateStr);
         const isLesson = lessons.includes(dateStr);
         const isWeekend = (new Date(y,m,d).getDay() === 0 || new Date(y,m,d).getDay() === 6);
 
-        if (in1 && isLesson) return "both1";
-        if (in2 && isLesson) return "both2";
-        if (in3 && isLesson) return "both3";
-        if (in4 && isLesson) return "both4";
-        if (in5 && isLesson) return "both5";
-        if (in6 && isLesson) return "both6";
-        if (in7 && isLesson) return "both7";
-        if (in8 && isLesson) return "both8";
-        if (in1) return "p1";
-        if (in2) return "p2";
-        if (in3) return "p3";
-        if (in4) return "p4";
-        if (in5) return "p5";
-        if (in6) return "p6";
-        if (in7) return "p7";
-        if (in8) return "p8";
-        if (isLesson) return "lesson";
-        if (isWeekend) return "weekend";
-        return "";
+        let classes = [];
+
+        if (in1) classes.push("p1");
+        else if (in2) classes.push("p2");
+        else if (in3) classes.push("p3");
+        else if (in4) classes.push("p4");
+        else if (in5) classes.push("p5");
+        else if (in6) classes.push("p6");
+        else if (in7) classes.push("p7");
+        else if (in8) classes.push("p8");
+        else if (in9) classes.push("p9");
+        else if (isWeekend) classes.push("weekend");
+
+        if (isLesson) classes.push("lesson-badge");
+
+        return classes.join(" ");
     }
 
     function render() {
@@ -333,13 +352,18 @@
             const startOffset = getStartOffset(year, m);
             const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
 
-            let html = `<div class="month-card"><div class="month-title">${months[m]} ${year}</div>
-                        <table class="calendar-table"><thead><tr>`;
+            let html = `<div class="month-card">
+                        <div class="month-title">${months[m]} ${year}</div>
+                        <table class="calendar-table">
+                            <thead>
+                                <tr>`;
             for (let w of weekDays) {
                 const isW = (w === "Сб" || w === "Вс");
-                html += `<th${isW ? ' style="color:#e74c3c;"' : ''}>${w}</th>`;
+                html += `<th class="${isW ? 'weekend-header' : ''}">${w}</th>`;
             }
-            html += `</thead><tbody>`;
+            html += `</tr>
+                            </thead>
+                            <tbody>`;
 
             let day = 1;
             for (let i = 0; i < totalCells; i++) {
