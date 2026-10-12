@@ -25,8 +25,9 @@
             --p5-bg: #ffe4e6; --p5-color: #be123c;
             --p6-bg: #dbeafe; --p6-color: #1d4ed8;
             --p7-bg: #ccfbf1; --p7-color: #0f766e;
-            --p8-bg: #ffedd5; --p8-color: #9a3412; /* Рыжий Пакет 8 */
+            --p8-bg: #ffedd5; --p8-color: #9a3412;
             --p9-bg: #fce7f3; --p9-color: #9d174d;
+            --p10-bg: #e2e8f0; --p10-color: #334155; /* Новый Пакет 10 — нейтральный серо-синий */
         }
 
         * {
@@ -171,6 +172,7 @@
         .p7 { background-color: var(--p7-bg); color: var(--p7-color); }
         .p8 { background-color: var(--p8-bg); color: var(--p8-color); }
         .p9 { background-color: var(--p9-bg); color: var(--p9-color); }
+        .p10 { background-color: var(--p10-bg); color: var(--p10-color); }
 
         /* Занятия (Яркая синяя рамка и точка) */
         .lesson-badge {
@@ -286,6 +288,14 @@
         "2026-09-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02"
     ];
 
+    // Пакет 10 (5 октября – 30 октября, 8 занятий Пн/Чт)
+    const pkg10 = [
+        "2026-10-05","2026-10-06","2026-10-07","2026-10-08","2026-10-09",
+        "2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16",
+        "2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23",
+        "2026-10-26","2026-10-27","2026-10-28","2026-10-29","2026-10-30"
+    ];
+
     // ---------- ЗАНЯТИЯ ЛИЗЫ (понедельник + четверг) ----------
     const lessons = [
         // пакет 1
@@ -305,7 +315,10 @@
         // пакет 8 (рыжий)
         "2026-08-10","2026-08-13","2026-08-17","2026-08-20","2026-08-24","2026-08-27","2026-08-31","2026-09-03",
         // пакет 9
-        "2026-09-07","2026-09-10","2026-09-14","2026-09-17","2026-09-21","2026-09-24","2026-09-28","2026-10-01"
+        "2026-09-07","2026-09-10","2026-09-14","2026-09-17","2026-09-21","2026-09-24","2026-09-28","2026-10-01",
+        // пакет 10 (Пн / Чт): 5 окт, 8 окт, 12 окт, 15 окт, 19 окт, 22 окт, 26 окт, 29 окт
+        "2026-10-05","2026-10-08","2026-10-12","2026-10-15",
+        "2026-10-19","2026-10-22","2026-10-26","2026-10-29"
     ];
 
     function getDaysInMonth(y,m) { return new Date(y, m+1, 0).getDate(); }
@@ -322,6 +335,7 @@
         const in7 = pkg7.includes(dateStr);
         const in8 = pkg8.includes(dateStr);
         const in9 = pkg9.includes(dateStr);
+        const in10 = pkg10.includes(dateStr);
         const isLesson = lessons.includes(dateStr);
         const isWeekend = (new Date(y,m,d).getDay() === 0 || new Date(y,m,d).getDay() === 6);
 
@@ -336,6 +350,7 @@
         else if (in7) classes.push("p7");
         else if (in8) classes.push("p8");
         else if (in9) classes.push("p9");
+        else if (in10) classes.push("p10");
         else if (isWeekend) classes.push("weekend");
 
         if (isLesson) classes.push("lesson-badge");
